@@ -1,0 +1,8 @@
+source venv/bin/activate         
+
+python -m pip install fastapi uvicorn python-jose pytest
+What these are for:
+fastapi → backend framework
+uvicorn → server to run FastAPI
+python-jose → JWT tokens (mock auth later)
+pytest → unit testing
