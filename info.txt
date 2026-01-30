@@ -1,8 +1,32 @@
 source venv/bin/activate         
 
+SSH Key -> Your identification has been saved in /Users/siddharthpuhan/.ssh/id_ed25519
+
 python -m pip install fastapi uvicorn python-jose pytest
 What these are for:
 fastapi → backend framework
 uvicorn → server to run FastAPI
 python-jose → JWT tokens (mock auth later)
-pytest → unit testing
+pytest → unit testing. (python -m pytest)
+
+
+Typical Workflow
+
+When you start a new feature, create a feature branch: git checkout -b feature-auth
+
+Do work → commit → push:
+
+git add .
+git commit -m "Add mock auth"
+git push origin feature-auth
+
+When finished, merge after review:
+
+git checkout main
+git merge feature-auth
+git push
+
+
+check current branch: git branch
+
+
