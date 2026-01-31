@@ -28,5 +28,16 @@ git push
 
 
 check current branch: git branch
+check git status: git status
 
+git only pushes commits, not edited files. So, if a file is edited then it will be shown as modified after running "git status"
+if you see modifed files then create a commit and push
 
+git add .
+git commit -m "your message"
+git push
+
+SCHEMAS:
+
+Models = SQLite DB tables - skeleton (models.py)
+Schemas = What APIs send/receive - language of communication (schemas.py)
