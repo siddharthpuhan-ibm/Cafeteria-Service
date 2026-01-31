@@ -37,7 +37,9 @@ git add .
 git commit -m "your message"
 git push
 
+Run the uvicorn server: uvicorn app.main:app --reload
+
 SCHEMAS:
 
-Models = SQLite DB tables - skeleton (models.py)
-Schemas = What APIs send/receive - language of communication (schemas.py)
+Models (SQLite DB tables and SQLAlchemy) - define how data is stored in SQLite (models.py)
+Schemas (Pydantic) - define how data enters and leaves APIs (schemas.py)
