@@ -1,52 +1,66 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from datetime import datetime
-from typing import List
-
-# login request schemas
-class LoginRequest(BaseModel):
-    w3_id: str
-    name: str
-    manager_w3_id: str
+from typing import Optional
+from decimal import Decimal
 
 
-class TokenResponse(BaseModel):
-    access_token: str
-    token_type: str
+# User schemas
+class UserResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    
+    id: int
+    employee_uid: str
+    email: str
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    manager_name: Optional[str] = None
 
-# seat schemas
+
+# Timeslot schemas
+class TimeslotResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    
+    id: int
+    starts_at: datetime
+    ends_at: datetime
+
+
+# Seat schemas
 class SeatResponse(BaseModel):
-    seat_number: int
-    status: str
+    model_config = ConfigDict(from_attributes=True)
+    
+    id: int
+    label: str
+    available: bool = True
+    mine: bool = False
 
-    class Config:
-        orm_mode = True
+
+# Reservation schemas
+class ReservationCreate(BaseModel):
+    seat_id: int
+    timeslot_id: int
 
 
-# booking schemas
-# request
-class BookingCreate(BaseModel):
-    seat_number: int
-    start_time: datetime
-    end_time: datetime
-
-# response
-class BookingResponse(BaseModel):
+class ReservationResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    
     id: int
     user_id: int
-    seat_number: int
-    start_time: datetime
-    end_time: datetime
-    timestamp: datetime
+    seat_id: int
+    timeslot_id: int
+    status: str
+    created_at: datetime
+    available_at: Optional[datetime] = None
+    seat: SeatResponse
+    timeslot: TimeslotResponse
 
-    class Config:
-        orm_mode = True
 
-
-# user schema
-class UserResponse(BaseModel):
-    w3_id: str
-    name: str
-    manager_w3_id: str
-
-    class Config:
-        orm_mode = True
+# Charge schemas
+class ChargeResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    
+    id: int
+    manager_id: int
+    reservation_id: int
+    amount: Decimal
+    created_at: datetime
